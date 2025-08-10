@@ -19,13 +19,13 @@ pysam
 The eCLIP Library is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
 ### get cleaned reads
 Cut adapters
-cutadapt -j {CORES} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
--a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
--A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
--o {output.fix_R1} \
--p {output.fix_R2} \
- {input.raw_R1} \
- {input.raw_R2}
+>cutadapt -j {CORES} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
+>-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+>-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
+>-o {output.fix_R1} \
+>-p {output.fix_R2} \
+> {input.raw_R1} \
+> {input.raw_R2}
  # {CORES}: core number used
  # {output.fix_R1}: Output read 1 file (.fq.gz)
  # {output.fix_R2}: Output read 2 file (.fq.gz)
