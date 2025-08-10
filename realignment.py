@@ -1,24 +1,3 @@
-##########################################################################################################
-# to do realignment for PBS-seq hisat-3n mapping results
-# Author: Zhe Jiang
-# created on 2021/11/21
-# last updated: ver1 2021/11/21: construct the frame of realignment
-#               ver2 2021/12/02: load sequence from bam file
-#               ver3 2021/12/06: add re-score system and output part
-#               ver4 2021/12/07: deal with soft clip
-#               ver5 2021/12/08: add multiple processing, add parameter load session, add filter
-#               ver6 2021/12/15: fix some bugs， add a tag "SC" to store best score
-#               ver7 2021/12/22: fix some bugs
-#               ver8 2022/01/10: change scoring to fit 4n mapping result
-#               ver9 2022/01/17: add logs output, improve I/O and accelerate
-#               ver10 2022/01/19: gather remove multiple mapping part, program normalization
-#               ver11 2022/02/14: same ref, realign once, accelerate
-#               ver12 2022/02/18: add a mode --fast, skip the XXXM, do not do alignment
-#               ver13 2022/04/06: increase insertion punishment and continuous deletion punishment
-#               ver14 2022/06/09: change punishment
-##########################################################################################################
-
-
 ##############################################################
 # import packages
 ##############################################################
