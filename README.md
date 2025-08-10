@@ -4,8 +4,8 @@ This is the bioinformatics guide and scripts for PRAISE performed on small RNAs.
 For all the codes shown in this document, the parameters are the same as our data GSE299274. You can change suitable parameters for yourself.
 The original bioinformatics pipeline of PRAISE is in https://github.com/Zhe-jiang/PRAISE.
 
-# 1. Requirements
-## Softwares:
+## 1. Requirements
+### Softwares:
 cutadapt
 umi_tools
 seqkit
@@ -15,6 +15,12 @@ python3
 packages of python3
 pysam
 
-# 2. Bioinformatics pipeline of PRAISE performed on small RNAs.
+## 2. Bioinformatics pipeline of PRAISE performed on small RNAs.
 The eCLIP Library is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
+
+## 3. Mapping your reads.
+
+## 4. Count the BAM file and call psiU signals.
+
+## 5. R functions for analysis on the interplay of PUS enzymes.
 
