@@ -130,7 +130,7 @@ The meanings of the parameters above are as follows:
 > python call_signal.py -pc {p_value} -u {input.untreated_bmat} -i {input.treated_bmat} -o {output.signals_csv} -o {output.signals_bed}
 
 The meanings of the parameters above are as follows:  
-{p_value}: The p-value, which is used for pseudouridine signal calls. Here we use 0.0001.
+{p_value}: The p-value, which is used for pseudouridine signal calls. Here we use 0.0001.  
 {input.untreated_bmat}: input BMAT file of the untreated group (.bmat)  
 {input.treated_bmat}: input BMAT file of the treated group (.bmat)  
 {output.signals_csv}: output csv file (.csv)  
