@@ -127,16 +127,17 @@ The meanings of the parameters above are as follows:
 {output.bmat}: output BMAT file (.bmat)  
 
 - Call pseudouridine signals.
-> python call_signal.py -pc 0.0001 -u {input.untreated_bmat} -i {input.treated_bmat} -o {output.signals_csv} -o {output.signals_bed}
+> python call_signal.py -pc {p_value} -u {input.untreated_bmat} -i {input.treated_bmat} -o {output.signals_csv} -o {output.signals_bed}
 
 The meanings of the parameters above are as follows:  
+{p_value}: The p-value, which is used for pseudouridine signal calls. Here we use 0.0001.
 {input.untreated_bmat}: input BMAT file of the untreated group (.bmat)  
 {input.treated_bmat}: input BMAT file of the treated group (.bmat)  
 {output.signals_csv}: output csv file (.csv)  
 {output.signals_bed}: output bed file (.bed)  
 
 ## 5. R functions for analysis on the interplay of PUS enzymes.
-
+After the pseudouridine signals are detected, we use R scripts for downstream data analysis and graphic processing.
 
 
 
