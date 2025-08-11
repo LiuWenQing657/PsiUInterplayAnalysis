@@ -45,12 +45,16 @@ The meanings of the parameters above are as follows:
 {output.dedup_R2}:  read 2 file after deduplication (.fq.gz)  
 
 - Cut 10 mer of the 5' end of the read
++ the length of UMI is 8 mer.
++ cut additional 2 mer of possible template switch to increase the confidence of the mapping result.
 > umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \  
 > -I {input} -S {output}
   
 The meanings of the parameters above are as follows:  
 {input.dedup_R2}: read 2 file after deduplication (.fq.gz)  
-{output.cut5prime_R2}: read file after cutting 14 mer of 5' end of read (.fq.gz)  
+{output.cut5prime_R2}: read file after cutting 14 mer of 5' end of read (.fq.gz)   
+
+This is the final step of reads pre-processing of eCLIP library.
 
 ### 2) Mapping cleaned reads.
 >hisat2 -p {cores} \
