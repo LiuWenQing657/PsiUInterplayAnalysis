@@ -28,11 +28,11 @@ Our analysis pipeline is customized for the eCLIP library construction, which is
 > -p {output.fix_R2} \
 > {input.raw_R1} \
 > {input.raw_R2}
-> {cores}: core number used
-> {output.fix_R1}: Output read 1 file (.fq.gz)
-> {output.fix_R2}: Output read 2 file (.fq.gz)
-> {input.raw_R1}: Input read 1 file (.fq.gz)
-> {input.raw_R2}: Input read 2 file (.fq.gz)
+> # {cores}: core number used
+> # {output.fix_R1}: Output read 1 file (.fq.gz)
+> # {output.fix_R2}: Output read 2 file (.fq.gz)
+> # {input.raw_R1}: Input read 1 file (.fq.gz)
+> # {input.raw_R2}: Input read 2 file (.fq.gz)
 
 - Remove PCR duplication
 > seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}
