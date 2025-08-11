@@ -7,7 +7,7 @@ For detailed information on the principles and experiments of PRAISE， please r
 
 ## 1. Requirements
 ### Softwares:
-cutadapt
+cutadapt  
 umi_tools  
 seqkit  
 hisat2  
