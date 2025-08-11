@@ -11,12 +11,14 @@ umi_tools
 seqkit  
 hisat2  
 samtools  
-python3  
-The following python packages are needed:  
-pysam, 
+Python3  
+## The following Python packages are needed:  
+pysam, sys, os, multiprocessing, shutil, random, string, time
+
 ## 2. Bioinformatics pipeline of PRAISE performed on small RNAs.
-The eCLIP Library is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
-### get cleaned reads
+Our analysis pipeline is based on the eCLIP library construction, which is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
+
+### 1) getting cleaned reads
 Cut adapters
 >cutadapt -j {CORES} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
 >-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
@@ -31,7 +33,7 @@ Cut adapters
 >umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \
 >-I {input} -S {output}
 
-### Mapping cleaned reads.
+### 2) Mapping cleaned reads.
 >hisat2 -p {CORES} \
 >-x {INDEX_HISAT2} \
 >-q --repeat --no-spliced-alignment --very-sensitive \
