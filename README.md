@@ -20,7 +20,7 @@ pysam, sys, os, multiprocessing, shutil, random, string, time.
 Our analysis pipeline is customized for the eCLIP library construction, which is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
 
 ### 1) getting cleaned reads
-- Cut adapters
+- Cut the adapters of raw sequencing reads
 > cutadapt -j {cores} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
 > -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
 > -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
@@ -34,10 +34,16 @@ Our analysis pipeline is customized for the eCLIP library construction, which is
 > {input.raw_R1}: Input read 1 file (.fq.gz)
 > {input.raw_R2}: Input read 2 file (.fq.gz)
 
->seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}
+- Remove PCR duplication
+> seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}
+> {cores}: core number used
+> {input.fix_R2}: read 2 file after cutadapt (.fq.gz)
+> {output.dedup_R2}:  read 2 file after deduplication (.fq.gz)
 
->umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \
->-I {input} -S {output}
+- Cut 10 mer of the 5' end of the read
+> umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \
+> -I {input} -S {output}
+> 
 
 ### 2) Mapping cleaned reads.
 >hisat2 -p {cores} \
