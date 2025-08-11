@@ -96,6 +96,24 @@ The meanings of the parameters above are as follows:
 {output.bam_realigned}: Result bam file of the realignment (.bam)  
 {output.bam_filtered}: Bam file contains all filtered reads (.bam)  
 
+- Filter multiple alignments to retain the highest confidence realignment results.
+> samtools sort -O BAM -n -o {output.bam} -@ {cores} -m 2G -T {output.temp} {input.bam}
+> python remove_multi_mapping.py -rm keep -i {input.bam} -o {output.bam}
+
+The meanings of the parameters above are as follows:   
+{cores}: core number used  
+{input.bam}: Bam file contains multiple mapped reads
+{output.bam}: Output BAM files (.bam)
+
+- Remove the deletion signals at the end of reads, which may cause false positive signals.
+> python remove_end_signal.py -t {cores} -i {input.bam} -o {output.bam}
+> samtools sort -O BAM -o {output.bam} -@ {cores} -m 2G -T {output.temp} {input.bam}
+
+The meanings of the parameters above are as follows:  
+{cores}: core number used  
+{input.bam}: Bam file contains the deletion signals at the end of reads
+{output.bam}: Output BAM files (.bam)
+
 ## 4. Count the BAM file and call psiU signals.
 
 - Count MPILEUP file, and make it into a BMAT file using the script parse-mpileup_2.py. The script here originally from [Howard MENG](https://github.com/MengHoward). To ensure code clarity, it is provided directly in the repository.  
