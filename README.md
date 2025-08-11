@@ -45,8 +45,8 @@ The meanings of the parameters above are as follows:
 {output.dedup_R2}:  read 2 file after deduplication (.fq.gz)  
 
 - Cut 10 mer of the 5' end of the read
-+ the length of UMI is 8 mer.
-+ cut additional 2 mer of possible template switch to increase the confidence of the mapping result.
+  + the length of UMI is 8 mer.
+  + cut additional 2 mer of possible template switch to increase the confidence of the mapping result.
 > umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \  
 > -I {input} -S {output}
   
