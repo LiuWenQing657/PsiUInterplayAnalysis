@@ -89,12 +89,12 @@ The meanings of the parameters above are as follows:
 > -x {reference} -i {input.bam_name_sorted} -o {output.bam_realigned} -f {output.bam_filtered}
 
 The meanings of the parameters above are as follows:   
-{realign_script}: use realignment_forward.py for reads aligned to the forward sequences, use realignment_reverse.py for reads aligned to the reverse sequences
-{cores}: core number used
-{reference}: Reference used (.fa, same reference as the hisat2 index created from)
-{input.bam_name_sorted}: Output name sorted bam file (.bam)
-{output.bam_realigned}: Result bam file of the realignment (.bam)
-{output.bam_filtered}: Bam file contains all filtered reads (.bam)
+{realign_script}: use realignment_forward.py for reads aligned to the forward sequences, use realignment_reverse.py for reads aligned to the reverse sequences  
+{cores}: core number used  
+{reference}: Reference used (.fa, same reference as the hisat2 index created from)  
+{input.bam_name_sorted}: Output name sorted bam file (.bam)  
+{output.bam_realigned}: Result bam file of the realignment (.bam)  
+{output.bam_filtered}: Bam file contains all filtered reads (.bam)  
 
 ## 4. Count the BAM file and call psiU signals.
 
@@ -103,19 +103,19 @@ The meanings of the parameters above are as follows:
 > python parse-mpileup_2.py -p {cores} -i {input.mpileup} -o {output.bmat}  
 
 The meanings of the parameters above are as follows:   
-{count_script}: use parse-mpileup.py
-{cores}: core number used
-{input.mpileup}: input MPILEUP file (.mpileup)
-{output.bmat}: output BMAT file (.bmat)
+{count_script}: use parse-mpileup.py  
+{cores}: core number used  
+{input.mpileup}: input MPILEUP file (.mpileup)  
+{output.bmat}: output BMAT file (.bmat)  
 
 - Call pseudouridine signals.
 > python call_signal.py -pc 0.0001 -u {input.untreated_bmat} -i {input.treated_bmat} -o {output.signals_csv} -o {output.signals_bed}
 
 The meanings of the parameters above are as follows:  
-{input.untreated_bmat}: input BMAT file of the untreated group (.bmat)
-{input.treated_bmat}: input BMAT file of the treated group (.bmat)
-{output.signals_csv}: output csv file (.csv)
-{output.signals_bed}: output bed file (.bed)
+{input.untreated_bmat}: input BMAT file of the untreated group (.bmat)  
+{input.treated_bmat}: input BMAT file of the treated group (.bmat)  
+{output.signals_csv}: output csv file (.csv)  
+{output.signals_bed}: output bed file (.bed)  
 
 ## 5. R functions for analysis on the interplay of PUS enzymes.
 
