@@ -6,15 +6,14 @@ The original bioinformatics pipeline of PRAISE is in https://github.com/Zhe-jian
 
 ## 1. Requirements
 ### Softwares:
-cutadapt  
+cutadapt
 umi_tools  
 seqkit  
- hisat2  
+hisat2  
 samtools  
 python3  
-packages of python3  
-pysam  
-
+The following python packages are needed:  
+pysam, 
 ## 2. Bioinformatics pipeline of PRAISE performed on small RNAs.
 The eCLIP Library is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
 ### get cleaned reads
