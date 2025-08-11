@@ -20,14 +20,19 @@ pysam, sys, os, multiprocessing, shutil, random, string, time.
 Our analysis pipeline is customized for the eCLIP library construction, which is suitable for quantitative purposes of RNA with short length (e.g. tRNA sequencing).
 
 ### 1) getting cleaned reads
-Cut adapters
->cutadapt -j {cores} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
->-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
->-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
->-o {output.fix_R1} \
->-p {output.fix_R2} \
+- Cut adapters
+> cutadapt -j {cores} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
+> -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+> -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
+> -o {output.fix_R1} \
+> -p {output.fix_R2} \
 > {input.raw_R1} \
 > {input.raw_R2}
+> {cores}: core number used
+> {output.fix_R1}: Output read 1 file (.fq.gz)
+> {output.fix_R2}: Output read 2 file (.fq.gz)
+> {input.raw_R1}: Input read 1 file (.fq.gz)
+> {input.raw_R2}: Input read 2 file (.fq.gz)
 
 >seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}
 
