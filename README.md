@@ -83,7 +83,7 @@ The meanings of the parameters above are as follows:
 {output.bam_name_sorted.temp}: temporary file  
 {input.bam_mapped}: input BAM file without unmapped reads (.bam)  
 
-## 3. realignment of bam files.
+### 3). realignment of bam files.
 - realign the bam files using the script realignment.py.
 > python {realign_script} --fast -t {cores} -ms 4.8 \
 > -x {reference} -i {input.bam_name_sorted} -o {output.bam_realigned} -f {output.bam_filtered}
@@ -114,7 +114,7 @@ The meanings of the parameters above are as follows:
 {input.bam}: Bam file contains the deletion signals at the end of reads
 {output.bam}: Output BAM files (.bam)
 
-## 4. Count the BAM file and call psiU signals.
+### 4). Count the BAM file and call psiU signals.
 
 - Count MPILEUP file, and make it into a BMAT file using the script parse-mpileup_2.py. The script here originally from [Howard MENG](https://github.com/MengHoward). To ensure code clarity, it is provided directly in the repository.  
 > samtools mpileup -d {depth} -BQ0 -f {ref} {input.bam} -o {output.mpileup} --ff UNMAP,QCFAIL -aa  
@@ -136,7 +136,7 @@ The meanings of the parameters above are as follows:
 {output.signals_csv}: output csv file (.csv)  
 {output.signals_bed}: output bed file (.bed)  
 
-## 5. R functions for analysis on the interplay of PUS enzymes.
+### 5). R functions for analysis on the interplay of PUS enzymes.
 After the pseudouridine signals are detected, we use R scripts for downstream data analysis and graphic processing.
 
 
