@@ -28,22 +28,23 @@ Our analysis pipeline is customized for the eCLIP library construction, which is
 > -p {output.fix_R2} \
 > {input.raw_R1} \
 > {input.raw_R2}
-> # {cores}: core number used
-> # {output.fix_R1}: Output read 1 file (.fq.gz)
-> # {output.fix_R2}: Output read 2 file (.fq.gz)
-> # {input.raw_R1}: Input read 1 file (.fq.gz)
-> # {input.raw_R2}: Input read 2 file (.fq.gz)
+{cores}: core number used  
+{output.fix_R1}: Output read 1 file (.fq.gz)  
+{output.fix_R2}: Output read 2 file (.fq.gz)  
+{input.raw_R1}: Input read 1 file (.fq.gz)  
+{input.raw_R2}: Input read 2 file (.fq.gz)  
 
 - Remove PCR duplication
 > seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}
-> {cores}: core number used
-> {input.fix_R2}: read 2 file after cutadapt (.fq.gz)
-> {output.dedup_R2}:  read 2 file after deduplication (.fq.gz)
+{cores}: core number used  
+{input.fix_R2}: read 2 file after cutadapt (.fq.gz)  
+{output.dedup_R2}:  read 2 file after deduplication (.fq.gz)  
 
 - Cut 10 mer of the 5' end of the read
 > umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \
 > -I {input} -S {output}
-> 
+{input.dedup_R2}: read 2 file after deduplication (.fq.gz)  
+{output.cut5prime_R2}: read file after cutting 14 mer of 5' end of read (.fq.gz)  
 
 ### 2) Mapping cleaned reads.
 >hisat2 -p {cores} \
