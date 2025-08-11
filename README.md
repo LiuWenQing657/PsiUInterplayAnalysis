@@ -138,7 +138,8 @@ The meanings of the parameters above are as follows:
 
 ### 5) R functions for analysis on the interplay of PUS enzymes.
 After the pseudouridine signals are detected, we use R scripts for downstream data analysis and graphic processing.
-
+The main analysis script based on R has been provided. It can be sourced as follows:
+> source("RAnalysisFunctions.R")  
 
 
 
