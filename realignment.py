@@ -12,7 +12,7 @@ import shutil
 import random
 import string
 import time
-import remove_multi_mapping_ver4
+import remove_multi_mapping
 
 
 ##############################################################
