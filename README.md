@@ -21,13 +21,13 @@ Our analysis pipeline is customized for the eCLIP library construction, which is
 
 ### 1) getting cleaned reads
 - Cut the adapters of raw sequencing reads
-> cutadapt -j {cores} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \
-> -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
-> -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
-> -o {output.fix_R1} \
-> -p {output.fix_R2} \
+> cutadapt -j {cores} --times 1 -e 0.1 -O 3 --quality-cutoff 25 -m 30 \  
+> -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \  
+> -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \  
+> -o {output.fix_R1} \  
+> -p {output.fix_R2} \  
 > {input.raw_R1} \  
-> {input.raw_R2}
+> {input.raw_R2}  
   
 The meanings of the parameters above are as follows:  
 {cores}: core number used  
@@ -37,7 +37,7 @@ The meanings of the parameters above are as follows:
 {input.raw_R2}: Input read 2 file (.fq.gz)  
 
 - Remove PCR duplication
-> seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}  
+> seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}   
   
 The meanings of the parameters above are as follows:  
 {cores}: core number used  
@@ -46,9 +46,9 @@ The meanings of the parameters above are as follows:
 
 - Cut 10 mer of the 5' end of the read
   + the length of UMI is 8 mer.
-  + cut additional 2 mer of possible template switch to increase the confidence of the mapping result.
+  + cut additional 2 mer of possible template switch to increase the confidence of the mapping result.  
 > umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \  
-> -I {input} -S {output}
+> -I {input} -S {output}  
   
 The meanings of the parameters above are as follows:  
 {input.dedup_R2}: read 2 file after deduplication (.fq.gz)  
@@ -58,10 +58,10 @@ This is the final step of reads pre-processing of eCLIP library.
 
 ### 2) Mapping cleaned reads.
 - Map cleaned reads to the reference of small RNAs using hisat2 or bwa.
-> hisat2 -p {cores} \
-> -x {index_hisat2} \
-> -q --repeat --no-spliced-alignment --very-sensitive \
-> -U {input.processed_R2} \
+> hisat2 -p {cores} \  
+> -x {index_hisat2} \  
+> -q --repeat --no-spliced-alignment --very-sensitive \  
+> -U {input.processed_R2} \  
 > -S {output.sam}  
 
 The meanings of the parameters above are as follows:  
@@ -71,10 +71,10 @@ The meanings of the parameters above are as follows:
 {output.sam}: output sam file (.sam)  
 
 - Use samtools to process the alignment file to make it meet the input format for the next step.
-> samtools sort -O BAM -o {output.bam} -@ {cores} -m {mem} -T {output.bam_temp} {input.sam}
-> samtools index {input.bam} {output.bai}
-> samtools view -h -@ {cores} -bF 4 {input.bam_sorted} -o {output.bam_mapped}
-> samtools sort -@ {cores} -m {} -O BAM -n -o {output.bam_name_sorted} -T {output.bam_name_sorted.temp} {input.bam_mapped}
+> samtools sort -O BAM -o {output.bam} -@ {cores} -m {mem} -T {output.bam_temp} {input.sam}  
+> samtools index {input.bam} {output.bai}  
+> samtools view -h -@ {cores} -bF 4 {input.bam_sorted} -o {output.bam_mapped}  
+> samtools sort -@ {cores} -m {} -O BAM -n -o {output.bam_name_sorted} -T {output.bam_name_sorted.temp} {input.bam_mapped}  
 
 The meanings of the parameters above are as follows:  
 {cores}: core number used  
@@ -85,8 +85,8 @@ The meanings of the parameters above are as follows:
 
 ### 3) realignment of bam files.
 - realign the bam files using the script realignment.py.
-> python {realign_script} --fast -t {cores} -ms 4.8 \
-> -x {reference} -i {input.bam_name_sorted} -o {output.bam_realigned} -f {output.bam_filtered}
+> python {realign_script} --fast -t {cores} -ms 4.8 \  
+> -x {reference} -i {input.bam_name_sorted} -o {output.bam_realigned} -f {output.bam_filtered}  
 
 The meanings of the parameters above are as follows:   
 {realign_script}: use realignment_forward.py for reads aligned to the forward sequences, use realignment_reverse.py for reads aligned to the reverse sequences  
@@ -97,8 +97,8 @@ The meanings of the parameters above are as follows:
 {output.bam_filtered}: Bam file contains all filtered reads (.bam)  
 
 - Filter multiple alignments to retain the highest confidence realignment results.
-> samtools sort -O BAM -n -o {output.bam} -@ {cores} -m 2G -T {output.temp} {input.bam}
-> python remove_multi_mapping.py -rm keep -i {input.bam} -o {output.bam}
+> samtools sort -O BAM -n -o {output.bam} -@ {cores} -m 2G -T {output.temp} {input.bam}  
+> python remove_multi_mapping.py -rm keep -i {input.bam} -o {output.bam}  
 
 The meanings of the parameters above are as follows:   
 {cores}: core number used  
@@ -106,8 +106,8 @@ The meanings of the parameters above are as follows:
 {output.bam}: Output BAM files (.bam)
 
 - Remove the deletion signals at the end of reads, which may cause false positive signals.
-> python remove_end_signal.py -t {cores} -i {input.bam} -o {output.bam}
-> samtools sort -O BAM -o {output.bam} -@ {cores} -m 2G -T {output.temp} {input.bam}
+> python remove_end_signal.py -t {cores} -i {input.bam} -o {output.bam}  
+> samtools sort -O BAM -o {output.bam} -@ {cores} -m 2G -T {output.temp} {input.bam}  
 
 The meanings of the parameters above are as follows:  
 {cores}: core number used  
@@ -127,7 +127,7 @@ The meanings of the parameters above are as follows:
 {output.bmat}: output BMAT file (.bmat)  
 
 - Call pseudouridine signals.
-> python call_signal.py -pc {p_value} -u {input.untreated_bmat} -i {input.treated_bmat} -o {output.signals_csv} -o {output.signals_bed}
+> python call_signal.py -pc {p_value} -u {input.untreated_bmat} -i {input.treated_bmat} -o {output.signals_csv} -o {output.signals_bed}  
 
 The meanings of the parameters above are as follows:  
 {p_value}: The p-value, which is used for pseudouridine signal calls. Here we use 0.0001.  
