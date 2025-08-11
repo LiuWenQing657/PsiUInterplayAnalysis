@@ -27,8 +27,8 @@ Our analysis pipeline is customized for the eCLIP library construction, which is
 > -o {output.fix_R1} \
 > -p {output.fix_R2} \
 > {input.raw_R1} \  
-> {input.raw_R2}  
-  
+> {input.raw_R2}
+The meanings of the parameters above are as follows:  
 {cores}: core number used  
 {output.fix_R1}: Output read 1 file (.fq.gz)  
 {output.fix_R2}: Output read 2 file (.fq.gz)  
@@ -37,15 +37,15 @@ Our analysis pipeline is customized for the eCLIP library construction, which is
 
 - Remove PCR duplication
 > seqkit rmdup {input.fix_R2} -s -j {cores} -o {output.dedup_R2}  
-  
+The meanings of the parameters above are as follows:  
 {cores}: core number used  
 {input.fix_R2}: read 2 file after cutadapt (.fq.gz)  
 {output.dedup_R2}:  read 2 file after deduplication (.fq.gz)  
 
 - Cut 10 mer of the 5' end of the read
 > umi_tools extract --extract-method=string --bc-pattern=NNNNNNNNNN \  
-> -I {input} -S {output}  
-  
+> -I {input} -S {output}
+The meanings of the parameters above are as follows:  
 {input.dedup_R2}: read 2 file after deduplication (.fq.gz)  
 {output.cut5prime_R2}: read file after cutting 14 mer of 5' end of read (.fq.gz)  
 
