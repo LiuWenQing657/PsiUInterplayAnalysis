@@ -197,7 +197,7 @@ changedSites_correlationPlot <- function(pus_dependent_signal, fold_threld = 0.3
                                     shape = relativeChangeValue_label))+ 
     geom_point(size=1,shape=16,colour="lightgray",alpha=1)+
     #geom_text(data = pus_dependent_signal[pus_dependent_signal$relativeChangeValue_label == "up", ], 
-    #          aes(label = relativeChangeValue_label), vjust = 0, hjust = 0) + # 添加特定点的文本标签
+    #          aes(label = relativeChangeValue_label), vjust = 0, hjust = 0) + 
     # geom_smooth(method = "lm",se = F,color = "black")+
     # stat_cor(data = common_signal_withLabel,method = "pearson",digits=4,size=5) +
     theme_classic() +
@@ -208,9 +208,9 @@ changedSites_correlationPlot <- function(pus_dependent_signal, fold_threld = 0.3
     theme(axis.title.x = element_text(size=15,colour = "black"),
           axis.title.y = element_text(size=15,colour = "black"),
           axis.text = element_text(size=15,colour="black"),
-          plot.title = element_text(face = "bold",size=15), # 标题加粗
-          panel.border = element_rect(fill = NA, colour = "black", size=1), # 添加边框
-          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) + # 调整边缘留白
+          plot.title = element_text(face = "bold",size=15), 
+          panel.border = element_rect(fill = NA, colour = "black", size=1),
+          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) + 
     labs(x="Control",y="WriterKO") +
     scale_x_continuous(breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1.0), limits = c(0, 1)) + 
     scale_y_continuous(breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1.0), limits = c(0, 1)) +
@@ -222,7 +222,7 @@ changedSites_correlationPlot <- function(pus_dependent_signal, fold_threld = 0.3
     geom_point(aes(color = ifelse(abs(diff_deletion_ratio_mean.treated-diff_deletion_ratio_mean.control) <= absolute_threld, "InArea", 
                                   as.character(relativeChangeValue_label)))) +
     scale_color_manual(values = c("InArea" = "#F0F0F0", 
-                                  "keep" = "grey", # label=1的点也保持灰色
+                                  "keep" = "grey", 
                                   "up" = "red", 
                                   "down" = "blue")) +
     geom_abline(slope = 1, intercept = 0,  color = "grey", size = 0.5,  linetype = "dashed") + 
@@ -241,26 +241,26 @@ changedSites_correlationPlot <- function(pus_dependent_signal, fold_threld = 0.3
     geom_point(data = subset(pus_dependent_signal, relativeChangeValue_label == "keep"),
                size = 2, alpha = 1, shape = 16) +
     #geom_point(data = subset(pus_dependent_signal, relativeChangeValue_label == "up"),
-    #           size = 3, alpha = 1, shape = 17) +  # 实心正三角形
+    #           size = 3, alpha = 1, shape = 17) + 
     geom_point(data = subset(pus_dependent_signal, relativeChangeValue_label == "up"),
                size = 2, alpha = 1, shape = 16) +  
     geom_point(data = subset(pus_dependent_signal, relativeChangeValue_label == "down"),
-               size = 3, alpha = 1, shape = 25) +  # 实心倒三角形
+               size = 3, alpha = 1, shape = 25) +  
     # geom_text(data = pus_dependent_signal[pus_dependent_signal$relativeChangeValue_label == "up", ], 
-    #          aes(label = relativeChangeValue_label), vjust = 0, hjust = 0) + # 添加特定点的文本标签
+    #          aes(label = relativeChangeValue_label), vjust = 0, hjust = 0) +
     # geom_smooth(method = "lm",se = F,color = "black")+
     # stat_cor(data = common_signal_withLabel,method = "pearson",digits=4,size=5) +
     theme_classic() +
     coord_equal() + 
-    scale_x_continuous(expand = c(0.05, 0.05)) +  # 设置x轴的expand为c(0.5, 0.5)
-    scale_y_continuous(expand = c(0.05, 0.05)) +  # 设置y轴的expand为c(0.5, 0.5)
+    scale_x_continuous(expand = c(0.05, 0.05)) + 
+    scale_y_continuous(expand = c(0.05, 0.05)) +  
     ggtitle("PsiU Ratio") + 
     theme(axis.title.x = element_text(size=15,colour = "black"),
           axis.title.y = element_text(size=15,colour = "black"),
           axis.text = element_text(size=15,colour="black"),
-          plot.title = element_text(face = "bold",size=15), # 标题加粗
-          panel.border = element_rect(fill = NA, colour = "black", size=1), # 添加边框
-          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) + # 调整边缘留白
+          plot.title = element_text(face = "bold",size=15), 
+          panel.border = element_rect(fill = NA, colour = "black", size=1), 
+          plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")) + 
     labs(x="Control",y="WriterKO") +
     scale_x_continuous(breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1.0), limits = c(0, 1)) + 
     scale_y_continuous(breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1.0), limits = c(0, 1)) +
@@ -271,7 +271,6 @@ changedSites_correlationPlot <- function(pus_dependent_signal, fold_threld = 0.3
     #scale_color_manual(values = c("InArea" = "lightgrey", "OutArea" = "black")) +
     geom_point(aes(color = ifelse(abs(diff_deletion_ratio_mean.treated-diff_deletion_ratio_mean.control) <= absolute_threld, "InArea", 
                                   as.character(relativeChangeValue_label)))) +
-    # 设置颜色映射，包括灰色以及自定义的粉色和蓝色
     scale_color_manual(values = c("InArea" = "#F0F0F0", 
                                   #"keep" = "grey", # 
                                   "keep" = "#F0F0F0",
