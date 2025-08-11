@@ -57,28 +57,50 @@ The meanings of the parameters above are as follows:
 This is the final step of reads pre-processing of eCLIP library.
 
 ### 2) Mapping cleaned reads.
->hisat2 -p {cores} \
->-x {index_hisat2} \
->-q --repeat --no-spliced-alignment --very-sensitive \
->-U {input.processed_R2} \
->-S {output.SAM}
+- Map cleaned reads to the reference of small RNAs using hisat2 or bwa.
+> hisat2 -p {cores} \
+> -x {index_hisat2} \
+> -q --repeat --no-spliced-alignment --very-sensitive \
+> -U {input.processed_R2} \
+> -S {output.sam}  
 
->samtools sort -O BAM -o {output.bam} -@ {CORES} -m {MEM} -T {output.bam_temp} {input.sam}
+The meanings of the parameters above are as follows:  
+{cores}: core number used  
+{index_hisat2}: index needed for hisat2  
+{input.processed_R2}: pre-processed read 2 file (.fq.gz)  
+{output.sam}: output sam file (.sam)  
 
->samtools index {input.bam} {output.bai}
+- Use samtools to process the alignment file to make it meet the input format for the next step.
+> samtools sort -O BAM -o {output.bam} -@ {cores} -m {mem} -T {output.bam_temp} {input.sam}
+> samtools index {input.bam} {output.bai}
+> samtools view -h -@ {cores} -bF 4 {input.bam_sorted} -o {output.bam_mapped}
+> samtools sort -@ {cores} -m {} -O BAM -n -o {output.bam_name_sorted} -T {output.bam_name_sorted.temp} {input.bam_mapped}
 
->samtools view -h -@ {CORES} -bF 4 {input.bam_sorted} -o {output.bam_mapped}
+The meanings of the parameters above are as follows:  
+{cores}: core number used  
+{mem}: Memory used per core (e.g. 2G)  
+{output.bam_name_sorted}: output name sorted BAM file (.bam)  
+{output.bam_name_sorted.temp}: temporary file  
+{input.bam_mapped}: input BAM file without unmapped reads (.bam)  
 
->samtools sort -@ {CORES} -m {} -O BAM -n -o {output.bam_name_sorted} -T {output.bam_name_sorted.temp} {input.bam_mapped}
+## 3. realignment of bam files.
+- realign the bam files using the script realignment.py.
+> python {realign_script} --fast -t {cores} -ms 4.8 \
+> -x {reference} -i {input.bam_name_sorted} -o {output.bam_realigned} -f {output.bam_filtered}
 
->python {Realign_script} --fast -t {CORES} -ms 4.8 \
->-x {Reference} -i {input.bam_name_sorted} -o {output.bam_realigned} -f {output.bam_filtered}
+The meanings of the parameters above are as follows:   
+{realign_script}: use realignment_forward.py for reads aligned to the forward sequences, use realignment_reverse.py for reads aligned to the reverse sequences
+{cores}: core number used
+{reference}: Reference used (.fa, same reference as the hisat2 index created from)
+{input.bam_name_sorted}: Output name sorted bam file (.bam)
+{output.bam_realigned}: Result bam file of the realignment (.bam)
+{output.bam_filtered}: Bam file contains all filtered reads (.bam)
 
 ## 4. Count the BAM file and call psiU signals.
 
->samtools mpileup -d {depth} -BQ0 -f {REF} {input.bam} -o {output.mpileup} --ff UNMAP,QCFAIL -aa
-
->python {Count_script} -p {CORES} -i {input.mpileup} -o {output.bmat}
+- Use samtools to process the alignment file to make it meet the input format for the next step.
+> samtools mpileup -d {depth} -BQ0 -f {ref} {input.bam} -o {output.mpileup} --ff UNMAP,QCFAIL -aa
+> python {count_script} -p {cores} -i {input.mpileup} -o {output.bmat}
 
 ## 5. R functions for analysis on the interplay of PUS enzymes.
 
