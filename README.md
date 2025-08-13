@@ -170,6 +170,7 @@ You can get the PUS-dependent sites list using the following code:
 > decreasing_level <- 0.05  
 > decreasing_fold <- 0.5  
 > PUS_dependent_sites <- get_changedSites(common_signal_list, total_signal_list_1, absolute_threld=decreasing_level, fold_threld=decreasing_fold)  
+
 You can customize the parameters according to your needs.
 
 
