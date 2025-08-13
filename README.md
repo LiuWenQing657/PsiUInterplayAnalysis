@@ -141,7 +141,21 @@ After the pseudouridine signals are detected, we use R scripts for downstream da
 The main analysis script based on R has been provided. It can be sourced as follows:
 > source("RAnalysisFunctions.R")  
 
-Then you can get the overlapped psiU sites in 2 replicates using the following codes:  
+
+You can get the merged total signals of 2 replicates using the following codes:
+> bmat_path <- bmat_res_path
+> total_signal_ut_path <- paste0(bmat_path, "/293T-uT.bmat")
+> total_signal_t1_path <- paste0(bmat_path, "/293T-T1.bmat")
+> total_signal_t2_path <- paste0(bmat_path, "/293T-T2.bmat")
+> total_signal_list_1 <- get_totalSignal(total_signal_ut_path, total_signal_t1_path, total_signal_t2_path)[[2]]
+
+The meanings of the parameters above are as follows:  
+bmat_res_path: the path where you save the output BMAT files obtained above  
+293T-uT.bmat: the deletion signals called from the PRAISE-untreated group  
+293T-T1.bmat: the deletion signals called from replicate 1 of the PRAISE-treated groups  
+293T-T2.bmat: the deletion signals called from replicate 2 of the PRAISE-treated groups    
+
+You can get the overlapped psiU sites in 2 replicates using the following codes:  
 > signal_path <- signals_res_path  
 > common_signal_t1_path <- paste0(signal_path,"/","293T-T1.csv")  
 > common_signal_t2_path <- paste0(signal_path,"/","293T-T2.csv")  
