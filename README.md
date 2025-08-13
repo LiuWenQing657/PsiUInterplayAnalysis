@@ -141,7 +141,7 @@ After the pseudouridine signals are detected, we use R scripts for downstream da
 The main analysis script based on R has been provided. It can be sourced as follows:
 > source("RAnalysisFunctions.R")  
 
-Then you can get the overlapped psiU sites in 2 replicates using the following codes:
+Then you can get the overlapped psiU sites in 2 replicates using the following codes:  
 > signal_path <- signals_res_path  
 > common_signal_t1_path <- paste0(signal_path,"/","293T-T1.csv")  
 > common_signal_t2_path <- paste0(signal_path,"/","293T-T2.csv")  
@@ -149,7 +149,9 @@ Then you can get the overlapped psiU sites in 2 replicates using the following c
 > common_signal_list <- get_commonSites(common_signal_t1_path, common_signal_t2_path)[[2]]  
 
 The meanings of the parameters above are as follows:  
-signals_res_path: the path where you save the output csv files obtained above.  
+signals_res_path: the path where you save the output csv files obtained above  
+293T-T1.csv: the psiU sites from replicate 1 of the WT groups  
+293T-T2.csv: the psiU sites from replicate 2 of the WT groups  
 
 
 
