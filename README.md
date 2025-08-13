@@ -143,11 +143,11 @@ The main analysis script based on R has been provided. It can be sourced as foll
 
 
 You can get the merged total signals of 2 replicates using the following codes:
-> bmat_path <- bmat_res_path
-> total_signal_ut_path <- paste0(bmat_path, "/293T-uT.bmat")
-> total_signal_t1_path <- paste0(bmat_path, "/293T-T1.bmat")
-> total_signal_t2_path <- paste0(bmat_path, "/293T-T2.bmat")
-> total_signal_list_1 <- get_totalSignal(total_signal_ut_path, total_signal_t1_path, total_signal_t2_path)[[2]]
+> bmat_path <- bmat_res_path  
+> total_signal_ut_path <- paste0(bmat_path, "/293T-uT.bmat")  
+> total_signal_t1_path <- paste0(bmat_path, "/293T-T1.bmat")  
+> total_signal_t2_path <- paste0(bmat_path, "/293T-T2.bmat")  
+> total_signal_list_1 <- get_totalSignal(total_signal_ut_path, total_signal_t1_path, total_signal_t2_path)[[2]]  
 
 The meanings of the parameters above are as follows:  
 bmat_res_path: the path where you save the output BMAT files obtained above  
